@@ -1,14 +1,14 @@
 {
-    "require": {
-        "google/apiclient": "^2.7"
-    },
-    "scripts": {
-        "post-update-cmd": "Google_Task_Composer::cleanup"
-    },
-    "extra": {
-        "google/apiclient-services": [
-            "Drive",
-            "YouTube"
-        ]
-    }
+    "name": "rowen/gcloud",
+    "description": "PHP firebase",
+    "type": "project",
+    "license": "GNU3",
+    "authors": [
+        {
+            "name": "djking0",
+            "email": "48757105+djking0@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
 }

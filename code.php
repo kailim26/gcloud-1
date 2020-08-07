@@ -10,7 +10,7 @@ $insert_image = $_POST['image'];
 $insert_email = $_POST['email'];
 $insert_upload = $upload;
 
-
+//fetch data and check
 $get_user_data = "select * from user where email='$insert_email'";
 $run_user_data = mysqli_query($con, $get_user_data);
 $row_user_data= mysqli_fetch_array($run_user_data);

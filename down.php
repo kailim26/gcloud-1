@@ -13,6 +13,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 $data = curl_exec($ch);
 $error = curl_error($ch);
 curl_close($ch);
-file_put_contents($param['name'], $data);
+$your_path = "./downloaded/";
+file_put_contents($your_path . $param['name'], $data);
 echo json_encode($error);
 ?>

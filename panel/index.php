@@ -27,12 +27,23 @@ include("../includes/db.php");
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+	<![endif]-->
+	
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-analytics.js"></script>
+	<script defer src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+	<script defer src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+	<script defer src="../js/init-firebase.js"></script>
+	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script type="text/javascript" src="../download.js"></script>
-	<script type="text/javascript" src="../upload.js"></script>
+	<script type="text/javascript" src="../js/download.js"></script>
+	<script type="text/javascript" src="../js/upload.js"></script>
 	<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
 	<style>
 	.button-picker {
@@ -46,6 +57,7 @@ include("../includes/db.php");
 	font-size: 16px;
 	margin: 4px 2px;
 	cursor: pointer;
+	margin-left: 15px;
 	}
 	</style>
 </head>
@@ -66,8 +78,6 @@ include("../includes/db.php");
             <nav class="navbar top-navbar navbar-toggleable-sm navbar-light" style="position:relative;">
 				<div class="picker" style="position:absolute;right:10px;">
 					<label id="result" style="color:white;"></label>
-					<button class="button-picker" onclick="upload.Upload()"> Upload <i class="fab fa-google-drive fa-1.5x"></i></button>
-					<button class="button-picker" onclick="download.onApiLoad()"> Download <i class="fab fa-google-drive fa-1.5x"></i></button>
 					</div>
                 <div class="navbar-header">
 				    <!-- HEADER -->
@@ -133,14 +143,13 @@ include("../includes/db.php");
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="card-title">Uploaded files</h4>
-                                <div class="text-right">
-                                    <h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i> 1</h2>
-                                    <span class="text-muted">Upload</span>
-                                </div>
-                                <span class="text-success">10%</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 80%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+								<div class="row">
+									<button class="button-picker" onclick="upload.Upload()"> Upload <i class="fab fa-google-drive fa-1.5x"></i></button>
+									<div class="text-right" style="position: absolute; right: 1px; margin-right: 15px">
+										<h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i> 1 </h2>
+										<span class="text-muted">Upload</span>
+									</div>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -150,14 +159,13 @@ include("../includes/db.php");
                         <div class="card">
                             <div class="card-block">
                                 <h4 class="card-title">Downloaded Files</h4>
-                                <div class="text-right">
-                                    <h2 class="font-light m-b-0"><i class="ti-arrow-down text-info"></i> 5,000</h2>
-                                    <span class="text-muted">Download</span>
-                                </div>
-                                <span class="text-info">30%</span>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
+								<div class="row">
+									<button class="button-picker" onclick="download.onApiLoad()"> Download <i class="fab fa-google-drive fa-1.5x"></i></button>
+									<div class="text-right" style="position: absolute; right: 1px; margin-right: 15px">
+										<h2 class="font-light m-b-0"><i class="ti-arrow-down text-info"></i> 5,000</h2>
+										<span class="text-muted">Download</span>
+									</div>
+								</div>
                             </div>
                         </div>
                     </div>
