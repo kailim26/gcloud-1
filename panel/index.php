@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../includes/db.php");
+include("../dbconfig.php");
 ?>
 
 <!DOCTYPE html>
@@ -92,10 +92,10 @@ include("../includes/db.php");
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="index.html" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
+                            <a href="index.php" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="table-basic.html" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
+                            <a href="table.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
                         </li>
                 </nav>
                 <!-- End Sidebar navigation -->
