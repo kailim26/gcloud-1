@@ -1,0 +1,19 @@
+{
+  "name": "gcloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djking0/gcloud.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djking0/gcloud/issues"
+  },
+  "homepage": "https://github.com/djking0/gcloud#readme"
+}

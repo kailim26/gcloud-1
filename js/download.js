@@ -52,19 +52,7 @@
                     var doc = data[google.picker.Response.DOCUMENTS][0];
                     url = doc[google.picker.Document.URL];
                     name = doc.name;
-					Number.prototype.padLeft = function(base,chr){
-					var  len = (String(base || 10).length - String(this).length)+1;
-					return len > 0? new Array(len).join(chr || '0')+this : this;
-					}
-					var d = new Date,
-					dformat = [
-					d.getFullYear(),
-					(d.getMonth()+1).padLeft(),
-					d.getDate().padLeft()].join('-') +' ' +
-					[d.getHours().padLeft(),
-					d.getMinutes().padLeft(),
-					d.getSeconds().padLeft()].join(':');
-					var gparam = {download_count:"1", username:"rowen", image:"image.jpg", email:"haharowen@gmail.com", time:dformat};
+					var gparam = {is_download:"Yes", username:"rowen", image:"image.jpg", email:"haharowen@gmail.com"};
                     var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
                     console.log(param);
                     document.getElementById('result').innerHTML = "Downloading...";
@@ -73,9 +61,9 @@
                                 document.getElementById('result').innerHTML = "Download completed";
                             });
 							$.ajax({
-							url: 'https://gcloud-e4793.firebaseio.com/download.json',
+							url: '../code.php',
 							type: "POST",
-							data: JSON.stringify(gparam),
+							data: gparam,
 							});
                             }
                         }
