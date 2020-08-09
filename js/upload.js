@@ -70,7 +70,7 @@
     b.uploadCallback = function(data) {
       if (data.action == google.picker.Action.PICKED) {
         var fileId = data.docs[0].id;
-		var param = {is_upload:"Yes", username:"rowen", image:"image.jpg", email:"hrwedsadasdassadasen@gmail.com"};
+		var param = {is_upload:"Yes", username:"rowen", image:"image.jpg", email:"ed@gmail.com"};
         alert('Successfully Uploaded!');
 		$.ajax({
             url: '../code.php',

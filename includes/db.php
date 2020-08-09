@@ -10,7 +10,7 @@ $dbname = 'gcloud';
 $dbuser = 'root';
 
 // Database Password
-$dbpass = 'root';
+$dbpass = '';
 
 //: MYSQL
 $con = mysqli_connect("$dbhost","$dbuser","$dbpass","$dbname"); 

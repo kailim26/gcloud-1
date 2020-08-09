@@ -29,10 +29,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>
+
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -66,8 +63,17 @@
                             <a href="index.php" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="table.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
+                            <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
+							<ul>
+								<li> 
+									<a href="table_upload.php"></i>Upload</a>
+								</li>
+								<li>
+									<a href="table_download.php"></i>Download</a>
+								</li>
+							</ul>
                         </li>
+					</ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -107,33 +113,33 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-block">
-                                <h4 class="card-title">Basic Table</h4>
-                                <h6 class="card-subtitle">Add class <code>.table</code></h6>
+                                <h3 class="card-title">History Table</h3>
+                                <h5 class="card-subtitle">Upload</h5>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Full Name</th>
+                                                <th>#</th>
                                                 <th>Email</th>
                                                 <th>Total Upload</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 										<?php
-										include("../dbconfig.php");
+										include("../includes/db.php");
 										
-										$snapshot = $database->getReference('upload/')->getSnapshot();
-										$fetchdata = $snapshot->getValue();
-										
-										foreach($fetchdata as $key => $row)
+										$get_upload_data = "select * from old_upload";
+										$run_upload_data = mysqli_query($con, $get_upload_data);
+										if(mysqli_num_rows($run_upload_data)>0)
+										{	
+										while($fetchdata=mysqli_fetch_array($run_upload_data))
 										{
-										?>
-                                            <tr>
-                                                <td><?php echo $row['username'];?></td>
-                                                <td><?php echo $row['email'];?></td>
-                                                <td><?php echo $row['upload_count'];?></td>
-                                            </tr>
-                                        <?php
+											echo "<tr>";
+												echo "<td>".$fetchdata['id']."</td>";
+												echo "<td>".$fetchdata['email']."</td>";
+												echo "<td>".$fetchdata['count']."</td>";
+											echo "</tr>";
+										}
 										}
 										?>
                                         </tbody>

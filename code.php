@@ -112,11 +112,17 @@ $username = $row_user_data['username'];
 $image = $row_user_data['image'];
 $email = $row_user_data['email'];
 
+//Upload history fetch
+$download_id = $row_download_data['id'];
+$download_email = $row_download_data['email'];
+$download_count = $row_download_data['count'];
+$download_latest_time = $row_download_data['time'];
+
 //check
 
 	//Update history downloaded data if exist email
 	if(mysqli_num_rows($run_user_data) > 0) {
-		if(mysqli_num_rows($run_upload_data) == 0 ){
+		if(mysqli_num_rows($run_download_data) == 0 ){
 			$download_query = "
 			INSERT INTO old_download(
 			email,
@@ -135,14 +141,14 @@ $email = $row_user_data['email'];
 				
 		}else{
 			$download_update_query = "
-			UPDATE old_upload SET
+			UPDATE old_download SET
 			count = '$download_count' + 1 ,
 			time = NOW()
 			WHERE email = '$insert_email'
 			";
-			echo "updated download record";
 			$download_update_query_run = mysqli_query($con, $download_update_query);
 			echo mysqli_error($con);
+			echo "updated download record";
 			}
 		
 	//Insert to database if no exist email	
@@ -158,16 +164,6 @@ $email = $row_user_data['email'];
 		'$insert_email'
 		)
 		";
-		$download_query = "
-		INSERT INTO old_download(
-		email,
-		time
-		) VALUES(
-		'$insert_email',
-		NOW()
-		)
-		";
-		$run_download_query = mysqli_query($con, $download_query);
 		$insert_query_run = mysqli_query($con, $insert_query);
 		echo mysqli_error($con);
 	}
