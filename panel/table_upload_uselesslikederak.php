@@ -29,10 +29,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>
+
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -66,7 +63,7 @@
                             <a href="index.php" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="table_download.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
+                            <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
 							<ul>
 								<li> 
 									<a href="table_upload.php"></i>Upload</a>
@@ -117,44 +114,59 @@
                         <div class="card">
                             <div class="card-block">
                                 <h3 class="card-title">History Table</h3>
-                                <h5 class="card-subtitle">Download</h5>
+                                <h5 class="card-subtitle">Upload</h5>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Email</th>
-                                                <th>Total Download</th>
+                                                <th>Total Upload</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 										<?php
 										include("../includes/db.php");
-										$results_per_page = 10;
-										if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-										$sql = 'SELECT * FROM old_download';
+										$results_per_page = '10';
+										
+										
+										// determine which page number visitor is currently on
+										if (!isset($_GET['page'])) {
+										  $page = 1;
+										} else {
+										  $page = $_GET['page'];
+										}
+										
+										$sql="SELECT * FROM old_upload order by time DESC LIMIT $this_page_first_result, ".$results_per_page;
 										$result = mysqli_query($con, $sql);
 										$number_of_results = mysqli_num_rows($result);
+
 										$number_of_pages = ceil($number_of_results/$results_per_page);
-										$start_from = ($page-1) * $results_per_page;
-										$get_download_data = "select * from old_download order by time DESC LIMIT $start_from, ".$results_per_page;
-										$run_download_data = mysqli_query($con, $get_download_data);
-							
+
+										// determine the sql LIMIT starting number for the results on the displaying page
+										$this_page_first_result = ($page-1)*$results_per_page;
+
+										// retrieve selected results from database and display them on page
+										$sql='SELECT * FROM old_upload order by time DESC LIMIT' . $this_page_first_result . ',' .  $results_per_page;
+										$result = mysqli_query($con, $sql);
 										
-										$i=$start_from + 1;
-										while($fetchdata=mysqli_fetch_array($run_download_data))
-										{
+										$i=1;
+										while($row = mysqli_fetch_array($result)) {
 											echo "<tr>";
 												echo "<td>".$i."</td>";
-												echo "<td>".$fetchdata['email']."</td>";
-												echo "<td>".$fetchdata['count']."</td>";
+												echo "<td>".$row['email']."</td>";
+												echo "<td>".$row['count']."</td>";
 											echo "</tr>";
-											$i++;
+											echo mysqli_error($con);
+										$i++;
+										
 										}
-										for ($page=1;$page<=$number_of_pages;$page++)
-										{
-										  echo '<a href="table_download.php?page=' . $page . '">' . $page . ' | </a> ';
+
+										// display the links to the pages
+										for ($page=1;$page<=$number_of_pages;$page++) {
+										  echo '<a href="table_upload.php?page=' . $page . '">' . $page . '</a> ';
 										}
+
 										?>
 										
                                         </tbody>

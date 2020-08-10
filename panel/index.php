@@ -154,8 +154,14 @@ include("../includes/db.php");
 								<div class="row">
 									<button class="button-picker" onclick="upload.Upload()"> Upload <i class="fab fa-google-drive fa-1.5x"></i></button>
 									<div class="text-right" style="position: absolute; right: 1px; margin-right: 15px">
-										<h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i> 1 </h2>
-										<span class="text-muted">Upload</span>
+										<?php
+											include('../includes/db.php');
+											$sum = mysqli_query($con, 'select sum(count) as value_sum from old_upload');
+											$row = mysqli_fetch_assoc($sum);
+											$sum = $row['value_sum'];
+										?>
+										<h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i><?php echo $sum ?></h2>
+										<span class="text-muted">Total Upload</span>
 									</div>
 								</div>
                             </div>
@@ -170,8 +176,14 @@ include("../includes/db.php");
 								<div class="row">
 									<button class="button-picker" onclick="download.onApiLoad()"> Download <i class="fab fa-google-drive fa-1.5x"></i></button>
 									<div class="text-right" style="position: absolute; right: 1px; margin-right: 15px">
-										<h2 class="font-light m-b-0"><i class="ti-arrow-down text-info"></i> 5,000</h2>
-										<span class="text-muted">Download</span>
+										<?php
+											include('../includes/db.php');
+											$sum = mysqli_query($con, 'select sum(count) as value_sum from old_download');
+											$row = mysqli_fetch_assoc($sum);
+											$sum = $row['value_sum'];
+										?>
+										<h2 class="font-light m-b-0"><i class="ti-arrow-down text-info"></i><?php echo $sum ?></h2>
+										<span class="text-muted">Total Download</span>
 									</div>
 								</div>
                             </div>
