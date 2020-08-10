@@ -127,23 +127,41 @@
                                         <tbody>
 										<?php
 										include("../includes/db.php");
-										
-										$get_upload_data = "select * from old_upload";
+										$results_per_page = 10;
+										if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
+										$start_from = ($page-1) * $results_per_page;
+										$get_upload_data = "select * from old_upload order by time DESC LIMIT $start_from, ".$results_per_page;
 										$run_upload_data = mysqli_query($con, $get_upload_data);
 										if(mysqli_num_rows($run_upload_data)>0)
 										{	
+										$i=1;
 										while($fetchdata=mysqli_fetch_array($run_upload_data))
 										{
 											echo "<tr>";
-												echo "<td>".$fetchdata['id']."</td>";
+												echo "<td>".$i."</td>";
 												echo "<td>".$fetchdata['email']."</td>";
 												echo "<td>".$fetchdata['count']."</td>";
 											echo "</tr>";
+											$i++;
 										}
 										}
 										?>
+										
                                         </tbody>
                                     </table>
+									
+									<?php 
+									$sql = "SELECT COUNT(id) AS total FROM old_upload";
+									$results = $con->query($sql);
+									$row = $results->fetch_assoc();
+									$total_pages = ceil($row["total"] / $results_per_page); 
+									
+									for ($i=1; $i<=$total_pages; $i++)
+									{
+									?>
+										<a href="table_upload.php?page=<?php $i ?>";
+										<?php if ($i==$page) ?>class="curPage"> <?php $i ?></a>;
+									<?php } ?>
                                 </div>
                             </div>
                         </div>

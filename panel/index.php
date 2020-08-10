@@ -184,37 +184,31 @@ include("../includes/db.php");
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-block">
-                                <select class="custom-select pull-right">
-                                    <option selected>January</option>
-                                    <option value="1">February</option>
-                                    <option value="2">March</option>
-                                    <option value="3">April</option>
-                                </select>
                                 <h4 class="card-title">Recent Activities</h4>
+								<div class="row">
+									<h5 style="margin-left:15px"><a href="./index.php">Upload </a>|<a href="./index.php?download"> Download</a></h5>
+								</div>
                                 <div class="table-responsive m-t-40">
                                     <table class="table stylish-table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2">Username</th>
-                                                <th>Email</th>
-                                                <th>Recent Access</th>
+                                                <th style="width:5%">#</th>
+                                                <th style="width:80%">Email</th>
+                                                <th style="width:15%">Recent Access</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td style="width:50px;"><span class="round">S</span></td>
-                                                <td><h6>Sunil Joshi</h6></td>
-                                                <td>Elite Admin</td>
-                                                <td>$3.9K</td>
-                                            </tr>
-                                            <tr class="active">
-                                                <td><span class="round"><img src="../assets/images/users/2.jpg" alt="user" width="50" /></span></td>
-                                                <td>
-                                                    <h6>Andrew</h6>
-												</td>
-                                                <td>Real Homes</td>
-                                                <td>$23.9K</td>
-                                            </tr>
+                                            <?php
+												include('../includes/db.php');
+												if(isset($_GET['download']))
+												{
+													include('./recent_download.php');
+												}
+												else
+												{
+													include('./recent_upload.php');
+												}
+											?>
                                         </tbody>
                                     </table>
                                 </div>
