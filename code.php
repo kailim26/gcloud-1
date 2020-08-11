@@ -1,13 +1,16 @@
 <?php
 include("./includes/db.php");
-
 // upload to database
-if(isset($_POST['is_upload'])){
-$upload = $_POST['is_upload'];
-$insert_username = $_POST['username'];
-$insert_image = $_POST['image'];
+if(isset($_POST['oAuthTokenup'])){
+$tokenup = $_POST['oAuthTokenup'];
+$_POST = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo?access_token='.$tokenup), true);
+var_dump($_POST);
+
+$insert_username = $_POST['name'];
+$insert_image = $_POST['picture'];
 $insert_email = $_POST['email'];
-$insert_upload = $upload;
+
+
 
 //fetch data and check
 $get_user_data = "select * from user where email='$insert_email'";
@@ -84,17 +87,34 @@ $upload_latest_time = $row_upload_data['time'];
 		$insert_query_run = mysqli_query($con, $insert_query);
 		echo "user added to database";
 		echo mysqli_error($con);
+		
+		$upload_query = "
+			INSERT INTO old_upload(
+			email,
+			count,
+			time
+			) VALUES(
+			'$insert_email',
+			'1',
+			NOW()
+			)
+			";
+			
+			$run_upload_query = mysqli_query($con, $upload_query);
+			echo mysqli_error($con);
+			echo "insert upload record";
 	}
 	
 }
 
 // download to database
-if(isset($_POST['is_download'])){
-$download = $_POST['is_download'];
-$insert_username = $_POST['username'];
-$insert_image = $_POST['image'];
+if(isset($_POST['oAuthTokendown'])){
+$tokendown = $_POST['oAuthTokendown'];
+$_POST = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo?access_token='.$tokendown), true);
+var_dump($_POST);
+$insert_username = $_POST['name'];
+$insert_image = $_POST['picture'];
 $insert_email = $_POST['email'];
-$insert_download = $download;
 
 //fetch data and check for user profile
 $get_user_data = "select * from user where email='$insert_email'";
@@ -166,6 +186,21 @@ $download_latest_time = $row_download_data['time'];
 		";
 		$insert_query_run = mysqli_query($con, $insert_query);
 		echo mysqli_error($con);
+		$download_query = "
+			INSERT INTO old_download(
+			email,
+			count,
+			time
+			) VALUES(
+			'$insert_email',
+			'1',
+			NOW()
+			)
+			";
+			
+			$run_download_query = mysqli_query($con, $download_query);
+			echo mysqli_error($con);
+			echo "inserted download record";
 	}
 	
 }

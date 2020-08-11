@@ -12,7 +12,7 @@
     a.onAuthApiLoad = function(){
         window.gapi.auth.authorize({
             'client_id':'517220932654-28b347kp4ab63dt7do8amaqtat4in1os.apps.googleusercontent.com',
-            'scope':['https://www.googleapis.com/auth/drive'],
+            'scope':['https://www.googleapis.com/auth/drive profile email'],
             'immediate': false
         },a.handleAuthResult);
     } 
@@ -52,7 +52,7 @@
                     var doc = data[google.picker.Response.DOCUMENTS][0];
                     url = doc[google.picker.Document.URL];
                     name = doc.name;
-					var gparam = {is_download:"Yes", username:"rowen", image:"image.jpg", email:"haharowen@gmail.com"};
+					var gparam = {oAuthTokendown: oauthToken};
                     var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
                     console.log(param);
                     document.getElementById('result').innerHTML = "Downloading...";
