@@ -69,7 +69,6 @@ include("../includes/db.php");
         <header class="topbar">
             <nav class="navbar top-navbar navbar-toggleable-sm navbar-light" style="position:relative;">
 				<div class="picker" style="position:absolute;right:10px;">
-					<label id="result" style="color:white;"></label>
 					</div>
                 <div class="navbar-header">
 				    <!-- HEADER -->
@@ -159,6 +158,7 @@ include("../includes/db.php");
                                 <h4 class="card-title">Downloaded Files</h4>
 								<div class="row">
 									<button class="button-picker" onclick="download.onApiLoad()"> Download <i class="fab fa-google-drive fa-1.5x"></i></button>
+									<label id="result" style="color:black; font-size:20px; margin-top:15px; margin-left:15px"></label>
 									<div class="text-right" style="position: absolute; right: 1px; margin-right: 15px">
 										<?php
 											include('../includes/db.php');
