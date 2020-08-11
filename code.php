@@ -1,13 +1,16 @@
 <?php
 include("./includes/db.php");
-
 // upload to database
-if(isset($_POST['is_upload'])){
-$upload = $_POST['is_upload'];
-$insert_username = $_POST['username'];
-$insert_image = $_POST['image'];
+if(isset($_POST['oAuthTokenup'])){
+$tokenup = $_POST['oAuthTokenup'];
+$_POST = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo?access_token='.$tokenup), true);
+var_dump($_POST);
+
+$insert_username = $_POST['name'];
+$insert_image = $_POST['picture'];
 $insert_email = $_POST['email'];
-$insert_upload = $upload;
+
+
 
 //fetch data and check
 $get_user_data = "select * from user where email='$insert_email'";
@@ -84,17 +87,34 @@ $upload_latest_time = $row_upload_data['time'];
 		$insert_query_run = mysqli_query($con, $insert_query);
 		echo "user added to database";
 		echo mysqli_error($con);
+		
+		$upload_query = "
+			INSERT INTO old_upload(
+			email,
+			count,
+			time
+			) VALUES(
+			'$insert_email',
+			'1',
+			NOW()
+			)
+			";
+			
+			$run_upload_query = mysqli_query($con, $upload_query);
+			echo mysqli_error($con);
+			echo "insert upload record";
 	}
 	
 }
 
 // download to database
-if(isset($_POST['is_download'])){
-$download = $_POST['is_download'];
-$insert_username = $_POST['username'];
-$insert_image = $_POST['image'];
+if(isset($_POST['oAuthTokendown'])){
+$tokendown = $_POST['oAuthTokendown'];
+$_POST = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo?access_token='.$tokendown), true);
+var_dump($_POST);
+$insert_username = $_POST['name'];
+$insert_image = $_POST['picture'];
 $insert_email = $_POST['email'];
-$insert_download = $download;
 
 //fetch data and check for user profile
 $get_user_data = "select * from user where email='$insert_email'";
@@ -112,11 +132,17 @@ $username = $row_user_data['username'];
 $image = $row_user_data['image'];
 $email = $row_user_data['email'];
 
+//Upload history fetch
+$download_id = $row_download_data['id'];
+$download_email = $row_download_data['email'];
+$download_count = $row_download_data['count'];
+$download_latest_time = $row_download_data['time'];
+
 //check
 
 	//Update history downloaded data if exist email
 	if(mysqli_num_rows($run_user_data) > 0) {
-		if(mysqli_num_rows($run_upload_data) == 0 ){
+		if(mysqli_num_rows($run_download_data) == 0 ){
 			$download_query = "
 			INSERT INTO old_download(
 			email,
@@ -135,14 +161,14 @@ $email = $row_user_data['email'];
 				
 		}else{
 			$download_update_query = "
-			UPDATE old_upload SET
+			UPDATE old_download SET
 			count = '$download_count' + 1 ,
 			time = NOW()
 			WHERE email = '$insert_email'
 			";
-			echo "updated download record";
 			$download_update_query_run = mysqli_query($con, $download_update_query);
 			echo mysqli_error($con);
+			echo "updated download record";
 			}
 		
 	//Insert to database if no exist email	
@@ -158,18 +184,23 @@ $email = $row_user_data['email'];
 		'$insert_email'
 		)
 		";
-		$download_query = "
-		INSERT INTO old_download(
-		email,
-		time
-		) VALUES(
-		'$insert_email',
-		NOW()
-		)
-		";
-		$run_download_query = mysqli_query($con, $download_query);
 		$insert_query_run = mysqli_query($con, $insert_query);
 		echo mysqli_error($con);
+		$download_query = "
+			INSERT INTO old_download(
+			email,
+			count,
+			time
+			) VALUES(
+			'$insert_email',
+			'1',
+			NOW()
+			)
+			";
+			
+			$run_download_query = mysqli_query($con, $download_query);
+			echo mysqli_error($con);
+			echo "inserted download record";
 	}
 	
 }

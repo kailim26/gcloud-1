@@ -1,8 +1,3 @@
-<?php
-session_start();
-include("../includes/db.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +10,7 @@ include("../includes/db.php");
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Admin Panel</title>
+    <title>Monster Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -27,55 +22,37 @@ include("../includes/db.php");
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<<<<<<< HEAD
-	<![endif]-->
-	
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script type="text/javascript" src="../js/download.js"></script>
-	<script type="text/javascript" src="../js/upload.js"></script>
-
-	<style>
-	.button-picker {
-	background-color: #4CAF50;
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
-	cursor: pointer;
-	margin-left: 15px;
-	}
-	</style>
+<![endif]-->
 </head>
 
-<body class="fix-header fix-sidebar card-no-border">
+<body class="fix-header card-no-border">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>
+
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
         <header class="topbar">
-            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light" style="position:relative;">
-				<div class="picker" style="position:absolute;right:10px;">
-					<label id="result" style="color:white;"></label>
-					</div>
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
                 <div class="navbar-header">
 				    <!-- HEADER -->
-					
                 </div>
             </nav>
         </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -87,7 +64,16 @@ include("../includes/db.php");
                         </li>
                         <li>
                             <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
+							<ul>
+								<li> 
+									<a href="table_upload.php"></i>Upload</a>
+								</li>
+								<li>
+									<a href="table_download.php"></i>Download</a>
+								</li>
+							</ul>
                         </li>
+					</ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -109,15 +95,10 @@ include("../includes/db.php");
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="text-themecolor m-b-0 m-t-0">Dashboard</h3>
-						<?php
-						if(isset($_SESSION['success'])){
-						echo '<h2> '.$_SESSION['success'].' </h2>.';
-						} 
-						?>
+                        <h3 class="text-themecolor m-b-0 m-t-0">Table</h3>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Table</li>
                         </ol>
                     </div>
                 </div>
@@ -127,83 +108,67 @@ include("../includes/db.php");
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <!-- Row -->
                 <div class="row">
-                    <!-- Column -->
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title">Uploaded files</h4>
-								<div class="row">
-									<button class="button-picker" onclick="upload.Upload()"> Upload <i class="fab fa-google-drive fa-1.5x"></i></button>
-									<div class="text-right" style="position: absolute; right: 1px; margin-right: 15px">
-										<?php
-											include('../includes/db.php');
-											$sum = mysqli_query($con, 'select sum(count) as value_sum from old_upload');
-											$row = mysqli_fetch_assoc($sum);
-											$sum = $row['value_sum'];
-										?>
-										<h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i><?php echo $sum ?></h2>
-										<span class="text-muted">Total Upload</span>
-									</div>
-								</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-block">
-                                <h4 class="card-title">Downloaded Files</h4>
-								<div class="row">
-									<button class="button-picker" onclick="download.onApiLoad()"> Download <i class="fab fa-google-drive fa-1.5x"></i></button>
-									<div class="text-right" style="position: absolute; right: 1px; margin-right: 15px">
-										<?php
-											include('../includes/db.php');
-											$sum = mysqli_query($con, 'select sum(count) as value_sum from old_download');
-											$row = mysqli_fetch_assoc($sum);
-											$sum = $row['value_sum'];
-										?>
-										<h2 class="font-light m-b-0"><i class="ti-arrow-down text-info"></i><?php echo $sum ?></h2>
-										<span class="text-muted">Total Download</span>
-									</div>
-								</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                </div>
-                </div>
-                <div class="row">
+                    <!-- column -->
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-block">
-                                <h4 class="card-title">Recent Activities</h4>
-								<div class="row">
-									<h5 style="margin-left:15px"><a href="./index.php">Upload </a>|<a href="./index.php?download"> Download</a></h5>
-								</div>
-                                <div class="table-responsive m-t-40">
-                                    <table class="table stylish-table">
+                                <h3 class="card-title">History Table</h3>
+                                <h5 class="card-subtitle">Upload</h5>
+                                <div class="table-responsive">
+                                    <table class="table">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%">#</th>
-                                                <th style="width:80%">Email</th>
-                                                <th style="width:15%">Recent Access</th>
+                                                <th>#</th>
+                                                <th>Email</th>
+                                                <th>Total Upload</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-												include('../includes/db.php');
-												if(isset($_GET['download']))
-												{
-													include('./recent_download.php');
-												}
-												else
-												{
-													include('./recent_upload.php');
-												}
-											?>
+										<?php
+										include("../includes/db.php");
+										$results_per_page = '10';
+										
+										
+										// determine which page number visitor is currently on
+										if (!isset($_GET['page'])) {
+										  $page = 1;
+										} else {
+										  $page = $_GET['page'];
+										}
+										
+										$sql="SELECT * FROM old_upload order by time DESC LIMIT $this_page_first_result, ".$results_per_page;
+										$result = mysqli_query($con, $sql);
+										$number_of_results = mysqli_num_rows($result);
+
+										$number_of_pages = ceil($number_of_results/$results_per_page);
+
+										// determine the sql LIMIT starting number for the results on the displaying page
+										$this_page_first_result = ($page-1)*$results_per_page;
+
+										// retrieve selected results from database and display them on page
+										$sql='SELECT * FROM old_upload order by time DESC LIMIT' . $this_page_first_result . ',' .  $results_per_page;
+										$result = mysqli_query($con, $sql);
+										
+										$i=1;
+										while($row = mysqli_fetch_array($result)) {
+											echo "<tr>";
+												echo "<td>".$i."</td>";
+												echo "<td>".$row['email']."</td>";
+												echo "<td>".$row['count']."</td>";
+											echo "</tr>";
+											echo mysqli_error($con);
+										$i++;
+										
+										}
+
+										// display the links to the pages
+										for ($page=1;$page<=$number_of_pages;$page++) {
+										  echo '<a href="table_upload.php?page=' . $page . '">' . $page . '</a> ';
+										}
+
+										?>
+										
                                         </tbody>
                                     </table>
                                 </div>
@@ -211,6 +176,9 @@ include("../includes/db.php");
                         </div>
                     </div>
                 </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -249,13 +217,6 @@ include("../includes/db.php");
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugins -->
-    <!-- ============================================================== -->
-    <!-- Flot Charts JavaScript -->
-    <script src="../assets/plugins/flot/jquery.flot.js"></script>
-    <script src="../assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="js/flot-data.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
