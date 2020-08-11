@@ -84,7 +84,7 @@ include("../includes/db.php");
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="index.php" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
+                            <a href="./index.php" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
                         </li>
                         <li>
                             <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Table</a>
@@ -117,7 +117,7 @@ include("../includes/db.php");
 						} 
 						?>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="./index.php">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
