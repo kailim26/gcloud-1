@@ -30,29 +30,13 @@ include("../includes/db.php");
 <<<<<<< HEAD
 	<![endif]-->
 	
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
-
-	<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-	<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-analytics.js"></script>
-	<script defer src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
-	<script defer src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
-	<script defer src="../js/init-firebase.js"></script>
-	
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="../js/download.js"></script>
 	<script type="text/javascript" src="../js/upload.js"></script>
-	
-
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script type="text/javascript" src="../download.js"></script>
-	<script type="text/javascript" src="../upload.js"></script>
 	<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+
 	<style>
 	.button-picker {
 	background-color: #4CAF50;
@@ -103,7 +87,7 @@ include("../includes/db.php");
                             <a href="index.php" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
+                            <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Table</a>
                         </li>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -133,7 +117,7 @@ include("../includes/db.php");
 						} 
 						?>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
@@ -194,19 +178,20 @@ include("../includes/db.php");
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="card">
+                        <div class="card" style="margin-left:30px; margin-right:30px">
                             <div class="card-block">
-                                <h4 class="card-title">Recent Activities</h4>
+                                <h4 class="card-title" style="margin-left:15px">Recent Activities</h4>
 								<div class="row">
-									<h5 style="margin-left:15px"><a href="./index.php">Upload </a>|<a href="./index.php?download"> Download</a></h5>
+									<h5 style="margin-left:30px"><a href="./index.php">Upload </a>|<a href="./index.php?download"> Download</a></h5>
 								</div>
                                 <div class="table-responsive m-t-40">
                                     <table class="table stylish-table">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%">#</th>
-                                                <th style="width:80%">Email</th>
-                                                <th style="width:15%">Recent Access</th>
+                                                <th style="width:10%">#</th>
+                                                <th style="width:20%">Username</th>
+                                                <th style="width:30%">Email</th>
+                                                <th style="width:20%">Recent Access</th>
                                             </tr>
                                         </thead>
                                         <tbody>

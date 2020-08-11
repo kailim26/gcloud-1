@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Monster Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <title>Admin Panel</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -63,7 +63,7 @@
                             <a href="index.php" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Basic Table</a>
+                            <a href="table_upload.php" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Table</a>
 							<ul>
 								<li> 
 									<a href="table_upload.php"></i>Upload</a>
@@ -97,7 +97,7 @@
                     <div class="col-md-6 col-8 align-self-center">
                         <h3 class="text-themecolor m-b-0 m-t-0">Table</h3>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                             <li class="breadcrumb-item active">Table</li>
                         </ol>
                     </div>
